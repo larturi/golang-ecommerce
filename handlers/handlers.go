@@ -6,6 +6,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/larturi/golang-ecommerce/auth"
+	"github.com/larturi/golang-ecommerce/routers"
 )
 
 func Manejadores(path string, method string, body string, headers map[string]string, request events.APIGatewayV2HTTPRequest) (int, string) {
@@ -108,6 +109,11 @@ func ProcesoCategory(
 	user string,
 	id int,
 	request events.APIGatewayV2HTTPRequest) (int, string) {
+
+	switch method {
+	case "POST":
+		return routers.InsertCategory(body, user)
+	}
 
 	return 400, "Method Invalid"
 }
