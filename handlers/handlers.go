@@ -26,7 +26,7 @@ func Manejadores(path string, method string, body string, headers map[string]str
 	partes := strings.Split(path, "/")
 	fmt.Println("Metodo a procesar: " + partes[1])
 
-	switch partes[1] {
+	switch partes[2] {
 	case "user":
 		return ProcesoUsers(body, path, method, user, id, request)
 	case "prod":
