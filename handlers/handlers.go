@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/larturi/golang-ecommerce/auth"
@@ -21,9 +22,11 @@ func Manejadores(path string, method string, body string, headers map[string]str
 		return statusCode, user
 	}
 
-	fmt.Println("path[0:4] = " + path[0:4])
+	// Extraigo de la url el ultimo parametro
+	partes := strings.Split(path, "/")
+	fmt.Println("Metodo a procesar: " + partes[1])
 
-	switch path[0:4] {
+	switch partes[1] {
 	case "user":
 		return ProcesoUsers(body, path, method, user, id, request)
 	case "prod":
