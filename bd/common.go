@@ -42,7 +42,7 @@ func ConnStr(claves models.SecretRDSJson) string {
 	dbUser = claves.Username
 	authToken = claves.Password
 	dbEndpoint = claves.Host
-	dbName = "sql10642491"
+	dbName = "golang_ecommerce_udemy"
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?allowCleartextPasswords=true", dbUser, authToken, dbEndpoint, dbName)
 	// fmt.Println(dsn)
 	return dsn
