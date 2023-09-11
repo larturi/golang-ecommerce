@@ -29,15 +29,15 @@ func Manejadores(path string, method string, body string, headers map[string]str
 	switch partes[2] {
 	case "user":
 		return ProcesoUsers(body, path, method, user, id, request)
-	case "prod":
+	case "products":
 		return ProcesoProducts(body, path, method, user, idn, request)
-	case "stoc":
+	case "stock":
 		return ProcesoStock(body, path, method, user, idn, request)
-	case "addr":
+	case "address":
 		return ProcesoAddress(body, path, method, user, idn, request)
-	case "cate":
+	case "category":
 		return ProcesoCategory(body, path, method, user, idn, request)
-	case "orde":
+	case "order":
 		return ProcesoOrder(body, path, method, user, idn, request)
 	}
 
