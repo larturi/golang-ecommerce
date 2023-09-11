@@ -24,7 +24,7 @@ func Manejadores(path string, method string, body string, headers map[string]str
 
 	// Extraigo de la url el ultimo parametro
 	partes := strings.Split(path, "/")
-	fmt.Println("Metodo a procesar: " + partes[1])
+	fmt.Println("Metodo a procesar: " + partes[2])
 
 	switch partes[2] {
 	case "user":
