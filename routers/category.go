@@ -11,6 +11,42 @@ import (
 func InsertCategory(body string, User string) (int, string) {
 	var t models.Category
 
+	isValidateCode, isValidateMsg := validations(body, User)
+
+	if isValidateCode != 200 {
+		return isValidateCode, isValidateMsg
+	}
+
+	result, err2 := bd.InsertCategory(t)
+	if err2 != nil {
+		return 400, "Ocurrió un error al intentar realizar el registro de la categoría " + t.CategName + " > " + err2.Error()
+	}
+
+	return 200, "{ CategID: " + strconv.Itoa(int(result)) + "}"
+}
+
+func UpdateCategory(body string, User string, Id int) (int, string) {
+	var t models.Category
+
+	isValidateCode, isValidateMsg := validations(body, User)
+
+	if isValidateCode != 200 {
+		return isValidateCode, isValidateMsg
+	}
+
+	t.CategID = Id
+	err2 := bd.UpdateCategory(t)
+
+	if err2 != nil {
+		return 400, "Ocurrió un error al intentar realizar el update de la categoría " + strconv.Itoa(Id) + " > " + err2.Error()
+	}
+
+	return 200, "Update OK "
+}
+
+func validations(body string, User string) (int, string) {
+	var t models.Category
+
 	err := json.Unmarshal([]byte(body), &t)
 	if err != nil {
 		return 400, "Error en los datos recibidos " + err.Error()
@@ -28,10 +64,5 @@ func InsertCategory(body string, User string) (int, string) {
 		return 400, msg
 	}
 
-	result, err2 := bd.InsertCategory(t)
-	if err2 != nil {
-		return 400, "Ocurrió un error al intentar realizar el registro de la categoría " + t.CategName + " > " + err2.Error()
-	}
-
-	return 200, "{ CategID: " + strconv.Itoa(int(result)) + "}"
+	return 200, "OK"
 }
