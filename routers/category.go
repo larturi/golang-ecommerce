@@ -2,6 +2,7 @@ package routers
 
 import (
 	"encoding/json"
+	"fmt"
 	"strconv"
 
 	"github.com/larturi/golang-ecommerce/bd"
@@ -35,13 +36,16 @@ func UpdateCategory(body string, User string, Id int) (int, string) {
 	}
 
 	t.CategID = Id
+
+	fmt.Println("RouterCategory > ", t.CategID, t.CategName, t.CategPath)
+
 	err2 := bd.UpdateCategory(t)
 
 	if err2 != nil {
 		return 400, "Ocurrió un error al intentar realizar el update de la categoría " + strconv.Itoa(Id) + " > " + err2.Error()
 	}
 
-	return 200, "Update OK "
+	return 200, "Update OK"
 }
 
 func validations(body string, User string) (int, string) {

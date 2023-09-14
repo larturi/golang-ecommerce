@@ -39,6 +39,8 @@ func InsertCategory(c models.Category) (int64, error) {
 
 func UpdateCategory(c models.Category) error {
 	fmt.Println("Comienza Update de Category")
+	fmt.Println("CategName > ", c.CategName)
+	fmt.Println("CategPath > ", c.CategPath)
 
 	err := DbConnect()
 	if err != nil {
