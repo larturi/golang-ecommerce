@@ -120,6 +120,8 @@ func ProcesoCategory(
 		return routers.UpdateCategory(body, user, id)
 	case "DELETE":
 		return routers.DeleteCategory(user, id)
+	case "GET":
+		return routers.SelectCategories(body, request)
 	}
 
 	return 400, "Method Invalid"
