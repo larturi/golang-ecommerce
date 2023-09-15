@@ -39,8 +39,6 @@ func InsertCategory(c models.Category) (int64, error) {
 
 func UpdateCategory(c models.Category) error {
 	fmt.Println("Comienza Update de Category")
-	fmt.Println("CategName > ", c.CategName)
-	fmt.Println("CategPath > ", c.CategPath)
 
 	err := DbConnect()
 	if err != nil {
@@ -73,5 +71,29 @@ func UpdateCategory(c models.Category) error {
 
 	fmt.Println(sentencia)
 	fmt.Println("Update Category > Ejecución Exitosa")
+	return nil
+}
+
+func DeleteCategory(id int) error {
+	fmt.Println("Comienza Delete de Category")
+
+	err := DbConnect()
+	if err != nil {
+		return err
+	}
+	defer Db.Close()
+
+	sentencia := "DELETE FROM category WHERE Categ_Id = " + strconv.Itoa(id)
+
+	fmt.Println("SQL > ", sentencia)
+
+	_, err = Db.Exec(sentencia)
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+
+	fmt.Println(sentencia)
+	fmt.Println("Delete Category > Ejecución Exitosa")
 	return nil
 }
